@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Touring Talkies</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            padding: 20px 40px;
+            min-height: 100vh;
+        }
+
+        h2 {
+            color: #e50914;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #f6121d;
+        }
+
+        p a {
+            display: inline-block;
+            background-color: #e50914;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+
+        p a:hover {
+            background-color: #f6121d;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #1e1e1e;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+
+        li span {
+            font-size: 1.1em;
+            color: #ffffff;
+        }
+
+        li a {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #e50914;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        li a:hover {
+            background-color: #f6121d;
+        }
+    </style>
+</head>
+<body>
+<h2>Admin Panel</h2>
+<p><a th:href="@{/admin/add}">Add Movie</a></p>
+<ul>
+    <li th:each="m:${movies}">
+        <span th:text="${m.title}"></span>
+        <span>
+                <a th:href="@{/admin/edit/{id}(id=${m.id})}">Edit</a>
+                <a th:href="@{/admin/delete/{id}(id=${m.id})}">Delete</a>
+            </span>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Movie - Touring Talkies</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        form {
+            background-color: #1e1e1e;
+            padding: 40px 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            color: #e50914;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            padding: 12px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 1em;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+        input:focus {
+            outline: none;
+            border: 1px solid #e50914;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #e50914;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #f6121d;
+        }
+
+        .thumbnail-preview {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .thumbnail-preview img {
+            max-width: 200px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/admin/edit}" method="post" enctype="multipart/form-data">
+    <h2>Edit Movie</h2>
+
+    <!-- Hidden ID -->
+    <input type="hidden" name="id" th:value="${movie.id}" />
+
+    <label>Title:
+        <input type="text" name="title" th:value="${movie.title}" required />
+    </label>
+
+    <label>Description:
+        <input type="text" name="description" th:value="${movie.description}" required />
+    </label>
+
+    <label>Genre:
+        <input type="text" name="genre" th:value="${movie.genre}" required />
+    </label>
+
+    <label>Release Year:
+        <input type="number" name="releaseYear" th:value="${movie.releaseYear}" required />
+    </label>
+
+    <label>Cast:
+        <input type="text" name="cast" th:value="${movie.cast}" />
+    </label>
+
+    <label>Crew:
+        <input type="text" name="crew" th:value="${movie.crew}" />
+    </label>
+
+    <label>
+        Free Content:
+        <input type="checkbox" name="freeContent" th:checked="${movie.freeContent}" />
+    </label>
+
+    <!-- Show current thumbnail if exists -->
+    <div class="thumbnail-preview" th:if="${movie.thumbnail != null}">
+        <span>Current Thumbnail:</span><br/>
+        <img th:src="@{'/thumbnails/' + ${movie.thumbnail}}" th:alt="${movie.title}" />
+    </div>
+
+    <label>Upload New Thumbnail:
+        <input type="file" name="thumbnailFile" accept="image/*" />
+    </label>
+
+    <button type="submit">Save Changes</button>
+</form>
+</body>
+</html>

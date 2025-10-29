@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie - Touring Talkies</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        form {
+            background-color: #1e1e1e;
+            padding: 40px 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            color: #e50914;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            padding: 12px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 1em;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+        input:focus {
+            outline: none;
+            border: 1px solid #e50914;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #e50914;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #f6121d;
+        }
+
+        p[th\\:if] {
+            color: #f6121d;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/admin/add}" method="post" enctype="multipart/form-data">
+    <h2>Add Movie</h2>
+    <label>Title:
+        <input name="title"/>
+    </label>
+    <label>Description:
+        <input name="description"/>
+    </label>
+    <label>Genre:
+        <input name="genre"/>
+    </label>
+    <label>Release Year:
+        <input name="releaseYear" type="number"/>
+    </label>
+    <label>Cast (comma separated):
+        <input name="cast"/>
+    </label>
+    <label>Crew:
+        <input name="crew"/>
+    </label>
+    <label>Free Content:
+        <input type="checkbox" name="freeContent" value="true"/>
+    </label>
+    <label>Video File:
+        <input type="file" name="videoFile"/>
+    </label>
+    <label>Thumbnail:
+        <input type="file" name="thumbnailFile"/>
+    </label>
+
+    <button type="submit">Add</button>
+    <p th:if="${error}" th:text="${error}"></p>
+</form>
+</body>
+</html>

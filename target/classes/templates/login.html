@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Touring Talkies</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        /* Body background like Netflix */
+        body {
+            background-color: #141414; /* Netflix dark background */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* App Title */
+        h1 {
+            color: #ffffff;
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Login form container */
+        form {
+            background-color: #1e1e1e;
+            padding: 40px 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Login Heading */
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #e50914; /* Netflix red */
+        }
+
+        /* Labels and inputs */
+        label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        input:focus {
+            outline: none;
+            border: 1px solid #e50914;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #e50914;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f6121d;
+        }
+
+        /* Error message */
+        p[th\\:if] {
+            color: #f6121d;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Register link */
+        p a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        p a:hover {
+            color: #e50914;
+        }
+    </style>
+</head>
+<body>
+<h1>Touring Talkies</h1>
+<form th:action="@{/login}" method="post">
+    <h2>Login</h2>
+    <label>Username:
+        <input name="username" />
+    </label>
+    <label>Password:
+        <input name="password" type="password" />
+    </label>
+    <button type="submit">Login</button>
+    <p th:if="${error}" th:text="${error}"></p>
+    <p><a th:href="@{/register}">Register</a></p>
+</form>
+</body>
+</html>

@@ -1,0 +1,150 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #141414; /* Netflix dark background */
+    color: #ffffff;
+    padding: 20px;
+}
+
+/* Header and user info */
+div[style*="float:right"] {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+div[style*="float:right"] a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+div[style*="float:right"] a:hover {
+    color: #e50914; /* Netflix red */
+}
+
+/* Page Title */
+h1 {
+    color: #e50914;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Search bar */
+form {
+    margin-bottom: 30px;
+}
+
+form input {
+    padding: 10px;
+    width: 300px;
+    border: none;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px 15px;
+    background-color: #e50914;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+form button:hover {
+    background-color: #f6121d;
+}
+
+/* Admin panel link */
+div a {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    background-color: #e50914;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div a:hover {
+    background-color: #f6121d;
+}
+
+/* Movie list */
+ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+ul li {
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 6px;
+    width: calc(25% - 20px);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+ul li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.7);
+}
+
+ul li h3 {
+    color: #e50914;
+    margin-bottom: 10px;
+}
+
+ul li p {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+ul li a {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #e50914;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+ul li a:hover {
+    background-color: #f6121d;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 1200px) {
+    ul li {
+        width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    ul li {
+        width: calc(50% - 20px);
+    }
+    form input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    ul li {
+        width: 100%;
+    }
+    form input {
+        width: 100%;
+    }
+}

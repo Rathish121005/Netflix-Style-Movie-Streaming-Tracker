@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Touring Talkies</title>
+    <style>
+        body { background-color: #141414; color: #fff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 20px 40px; }
+        .user-menu { display: flex; justify-content: flex-end; margin-bottom: 20px; font-size: 0.9em; }
+        .user-menu a { color: #fff; margin-left: 10px; text-decoration: none; }
+        .user-menu a:hover { color: #e50914; }
+        h1 { margin-bottom: 20px; color: #fff; font-size: 3em; }
+
+        /* Search bar styles */
+        .search-bar { margin-bottom: 30px; display: flex; justify-content: center; }
+        .search-bar input[type="text"] { width: 300px; padding: 8px 12px; border-radius: 4px 0 0 4px; border: none; }
+        .search-bar button { padding: 8px 12px; background-color: #e50914; color: #fff; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
+        .search-bar button:hover { background-color: #f6121d; }
+
+        ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 0; }
+        li { background-color: #1e1e1e; border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+        li:hover { transform: scale(1.03); box-shadow: 0 0 15px rgba(229,9,20,0.5); }
+        li img { width: 100%; height: 300px; object-fit: cover; display: block; }
+        li h3 { color: #e50914; text-align: center; margin: 10px 0 5px; }
+        li p { text-align: center; font-size: 0.9em; margin-bottom: 5px; }
+        li a.button { display: block; text-align: center; margin: 10px auto; padding: 8px 12px; background-color: #e50914; border-radius: 4px; text-decoration: none; font-weight: bold; width: 80%; }
+        li a.button:hover { background-color: #f6121d; }
+    </style>
+</head>
+<body>
+<div class="user-menu">
+    <span th:if="${user != null}">
+        Hello, <b th:text="${user.username}"></b> |
+        <a th:href="@{/profile}">Profile</a> |
+        <a th:href="@{/logout}">Logout</a>
+    </span>
+    <span th:if="${user == null}">
+        <a th:href="@{/login}">Login</a>
+    </span>
+</div>
+
+<h1>Touring Talkies</h1>
+
+<!-- Search form -->
+<div class="search-bar">
+    <form th:action="@{/movie/search}" method="get">
+        <input type="text" name="q" placeholder="Search movies by name..." />
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<ul>
+    <li th:each="m : ${movies}">
+        <a th:href="@{/movie/{id}(id=${m.id})}">
+            <img th:src="@{'/thumbnails/' + ${m.thumbnail}}" th:alt="${m.title}"
+                 onerror="this.src='/images/default-thumbnail.jpg'" />
+            <h3 th:text="${m.title}"></h3>
+        </a>
+        <p th:text="${m.description}"></p>
+        <p>Genre: <span th:text="${m.genre}"></span> | Year: <span th:text="${m.releaseYear}"></span></p>
+        <a class="button" th:href="@{/movie/{id}(id=${m.id})}">Play Movie</a>
+    </li>
+</ul>
+</body>
+</html>

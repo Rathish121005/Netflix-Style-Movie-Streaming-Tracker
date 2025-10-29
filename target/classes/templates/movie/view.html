@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movie.title} + ' - Touring Talkies'">Movie</title>
+    <style>
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            padding: 20px 40px;
+        }
+
+        .back-link {
+            margin-bottom: 20px;
+            display: inline-block;
+            color: #e50914;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .movie-container {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .movie-video {
+            flex: 2;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            background-color: black;
+        }
+
+        .movie-info {
+            flex: 1;
+        }
+
+        .movie-info h1 {
+            color: #e50914;
+            margin-bottom: 10px;
+        }
+
+        .movie-info p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .movie-info .label {
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons form, .buttons a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .buttons button, .buttons a {
+            background-color: #e50914;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .buttons button:hover, .buttons a:hover {
+            background-color: #f6121d;
+        }
+    </style>
+</head>
+<body>
+
+<a class="back-link" th:href="@{/}">&larr; Back to Home</a>
+
+<div class="movie-container">
+    <div class="movie-video">
+        <video id="moviePlayer" controls>
+            <source th:src="@{/movie/stream/{id}(id=${movie.id})}" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+
+    <div class="movie-info">
+        <h1 th:text="${movie.title}">Movie Title</h1>
+        <p><span class="label">Description:</span> <span th:text="${movie.description}">Movie description</span></p>
+        <p><span class="label">Genre:</span> <span th:text="${movie.genre}">Genre</span></p>
+        <p><span class="label">Release Year:</span> <span th:text="${movie.releaseYear}">2025</span></p>
+        <p><span class="label">Cast:</span> <span th:text="${movie.cast}">Cast list</span></p>
+        <p><span class="label">Crew:</span> <span th:text="${movie.crew}">Crew list</span></p>
+        <p><span class="label">Like %:</span> <span th:text="${movie.likePercentage}">0</span></p>
+
+        <div class="buttons">
+            <!-- Like button -->
+            <form th:action="@{/movie/like/{id}(id=${movie.id})}" method="post">
+                <button type="submit">Like</button>
+            </form>
+
+            <!-- Watchlist button -->
+            <form th:action="@{/movie/watchlist/{id}(id=${movie.id})}" method="post">
+                <button type="submit">Add to Watchlist</button>
+            </form>
+
+            <!-- Download button -->
+            <a th:href="@{/movie/download/{id}(id=${movie.id})}" target="_blank">Download</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Optional: custom keyboard shortcuts
+    const player = document.getElementById('moviePlayer');
+
+    // Spacebar to play/pause
+    document.addEventListener('keydown', e => {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            if(player.paused) player.play();
+            else player.pause();
+        }
+    });
+</script>
+
+</body>
+</html>
