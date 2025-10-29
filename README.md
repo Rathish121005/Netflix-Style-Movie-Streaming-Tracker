@@ -15,11 +15,15 @@ You explicitly asked for plain-text passwords. This is **very insecure** for any
 
 1. Install Java 17+ and Maven.
 2. Create a MySQL database `touringtalkiesdb` and set credentials in `src/main/resources/application.properties`.
-3. Build and run:
+3. Install Maven Dependencies
+   ```
+   mvn clean install
+   '''
+5. Build and run:
    ```
    mvn spring-boot:run
    ```
-4. Open `http://localhost:8080` in your browser.
+6. Open `http://localhost:8080` in your browser.
 
 Default admin user: none. Create a user and set role to ADMIN directly in database or via a simple SQL:
 ```sql
