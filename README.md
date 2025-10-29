@@ -23,7 +23,7 @@ You explicitly asked for plain-text passwords. This is **very insecure** for any
 
 Default admin user: none. Create a user and set role to ADMIN directly in database or via a simple SQL:
 ```sql
-INSERT INTO users (username, password, role) VALUES ('admin','admin123','ADMIN');
+INSERT INTO users (username,email, password, role) VALUES ('admin','admin@gmail.com,'admin123','ROLE_ADMIN');
 ```
 
 Uploaded videos are stored in the folder specified by `app.video.dir` in `application.properties` (default `videos`).
