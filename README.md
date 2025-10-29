@@ -14,7 +14,7 @@ You explicitly asked for plain-text passwords. This is **very insecure** for any
 ## How to run
 
 1. Install Java 17+ and Maven.
-2. Create a MySQL database `netflixdb` and set credentials in `src/main/resources/application.properties`.
+2. Create a MySQL database `touringtalkiesdb` and set credentials in `src/main/resources/application.properties`.
 3. Build and run:
    ```
    mvn spring-boot:run
